@@ -1,12 +1,14 @@
 # Synthehicle
 
-[![Paper](http://img.shields.io/badge/paper-arxiv.1001.2234-B31B1B.svg)](https://www.nature.com/articles/nature14539)
+[![Paper](http://img.shields.io/badge/paper-arxiv.0000.0000-B31B1B.svg)](https://fubel.github.io/synthehicle-dataset/)
+
+<img src="https://fubel.github.io/synthehicle-dataset/synthehicle.gif">
 
 Synthehicle is a massive CARLA-based synthehic multi-vehicle multi-camera tracking dataset and includes ground truth for 2D detection and tracking, 3D detection and tracking, depth estimation, and semantic, instance and panoptic segmentation. 
 
 ## Dataset
 
-The 17 hour Synthehicle dataset consists of 64 scenes in four different weather conditions, 16 different camera setups, and 340 camera videos. It is freely available via the following download links:
+The 17 hour Synthehicle dataset consists of 64 scenes in four different weather conditions, 16 different camera setups, and 340 camera videos. It is freely available via the following download links (note: the data is currently being loaded onto a server provided for this purpose. The download links will be made available in early September):
 
 * Dataset with `mp4` videos
 * Ground truth for tracking (COCO format)
@@ -26,18 +28,18 @@ If you want to generate more data, please follow the README in the `carla` direc
 
 ## Pretrained Models
 
-We provide pretrained weights for 2D detection and vehicle re-identification:
+We will provide pretrained weights for 2D detection and vehicle re-identification:
 
 ### Detection 
 We have used the YOLOX-x model from mmdetection.
 
 | Model   | Trained on | Weights | Config | AP    |
 |---------|------------|---------|--------|-------|
-| YOLOX-x | All        |         |        | 0.597 |
-| YOLOX-x | Day        |         |        | 0.587 |
-| YOLOX-x | Dawn       |         |        | 0.608 |
-| YOLOX-x | Rain       |         |        | 0.568 |
-| YOLOX-x | Night      |         |        | 0.506 |
+| YOLOX-x | All        |         |        |       |
+| YOLOX-x | Day        |         |        |       |
+| YOLOX-x | Dawn       |         |        |       |
+| YOLOX-x | Rain       |         |        |       |
+| YOLOX-x | Night      |         |        |       |
 
 ### Vehicle Re-Identification
 
@@ -57,10 +59,5 @@ We have used the fastreid ResNet-50 Model with IBN:
 If you use Synthehicle for your work, please cite:
 
 ```
-@article{YourName,
-  title={Your Title},
-  author={Your team},
-  journal={Location},
-  year={Year}
-}
+todo
 ``` 
