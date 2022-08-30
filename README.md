@@ -2,7 +2,7 @@
 
 [![Paper](http://img.shields.io/badge/paper-arxiv.0000.0000-B31B1B.svg)](https://fubel.github.io/synthehicle-dataset/)
 
-![gif](https://fubel.github.io/synthehicle-dataset/synthehicle.gif)
+![gif](synthehicle.gif)
 
 Synthehicle is a massive CARLA-based synthehic multi-vehicle multi-camera tracking dataset and includes ground truth for 2D detection and tracking, 3D detection and tracking, depth estimation, and semantic, instance and panoptic segmentation. 
 
