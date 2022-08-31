@@ -1,6 +1,6 @@
 # Synthehicle
 
-[![Paper](http://img.shields.io/badge/paper-arxiv.0000.0000-B31B1B.svg)](https://fubel.github.io/synthehicle-dataset/)
+[![Paper](http://img.shields.io/badge/paper-arxiv.2208.14167-B31B1B.svg)](https://arxiv.org/abs/2208.14167)
 
 ![gif](synthehicle.gif)
 
@@ -59,5 +59,15 @@ We have used the fastreid ResNet-50 Model with IBN:
 If you use Synthehicle for your work, please cite:
 
 ```
-todo
+@misc{https://doi.org/10.48550/arxiv.2208.14167,
+  doi = {10.48550/ARXIV.2208.14167},
+  url = {https://arxiv.org/abs/2208.14167},
+  author = {Herzog, Fabian and Chen, Junpeng and Teepe, Torben and Gilg, Johannes and Hörmann, Stefan and Rigoll, Gerhard},
+  keywords = {Computer Vision and Pattern Recognition (cs.CV), FOS: Computer and information sciences, FOS: Computer and information sciences},
+  title = {Synthehicle: Multi-Vehicle Multi-Camera Tracking in Virtual Cities},
+  publisher = {arXiv},
+  year = {2022},
+  copyright = {arXiv.org perpetual, non-exclusive license}
+}
+
 ``` 
