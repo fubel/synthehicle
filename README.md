@@ -8,19 +8,11 @@ Synthehicle is a massive CARLA-based synthehic multi-vehicle multi-camera tracki
 
 ## Dataset
 
-The 17 hour Synthehicle dataset consists of 64 scenes in four different weather conditions, 16 different camera setups, and 340 camera videos. It is freely available via the following download links (note: the data is currently being loaded onto a server provided for this purpose. The download links will be made available in early September):
-
-* Dataset with `mp4` videos
-* Ground truth for tracking (COCO format)
-* Ground truth for depth estimation
-* Ground truth ground truth for semantic, instance and panoptic segmentation
-* Full (raw, HD) jpg's for all 612'000 frames
-
-f you are only interested in performing RGB-based tracking (single- or multi-cam), you only need to download the first link. 
+The 17 hour Synthehicle dataset consists of 64 scenes in four different weather conditions, 16 different camera setups, and 340 camera videos. It is freely available via the following download links provided [here](DOWNLOAD.md).
 
 ## Evaluation & Baselines
 
-Evaluation scripts for all the tasks will be provided soon alongside an official evaluation server to test models against ground truth for several tasks.
+Evaluation scripts for all the tasks will be provided soon alongside an official evaluation server to test models against ground truth for several tasks (by end of September 2022).
 
 ## Generate Data
 
@@ -33,20 +25,20 @@ We will provide pretrained weights for 2D detection and vehicle re-identificatio
 ### Detection 
 We have used the YOLOX-x model from mmdetection.
 
-| Model   | Trained on | Weights | Config | AP    |
-|---------|------------|---------|--------|-------|
-| YOLOX-x | All        |         |        |       |
-| YOLOX-x | Day        |         |        |       |
-| YOLOX-x | Dawn       |         |        |       |
-| YOLOX-x | Rain       |         |        |       |
-| YOLOX-x | Night      |         |        |       |
+| Model   | Trained on | Weights | Config | AP  |
+| ------- | ---------- | ------- | ------ | --- |
+| YOLOX-x | All        |         |        |     |
+| YOLOX-x | Day        |         |        |     |
+| YOLOX-x | Dawn       |         |        |     |
+| YOLOX-x | Rain       |         |        |     |
+| YOLOX-x | Night      |         |        |     |
 
 ### Vehicle Re-Identification
 
 We have used the fastreid ResNet-50 Model with IBN:
 
 | Model    | Trained on | Weights | Config | mAP |
-|----------|------------|---------|--------|-----|
+| -------- | ---------- | ------- | ------ | --- |
 | fastreid | All        |         |        |     |
 | fastreid | Day        |         |        |     |
 | fastreid | Dawn       |         |        |     |
