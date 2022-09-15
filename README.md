@@ -16,7 +16,7 @@ Evaluation scripts for all the tasks will be provided soon alongside an official
 
 ## Generate Data
 
-If you want to generate more data, please follow the README in the `carla` directory.
+If you want to generate more data, please follow the README in the `carla` directory (coming soon, by end of September 2022)
 
 ## Pretrained Models
 
@@ -25,25 +25,29 @@ We will provide pretrained weights for 2D detection and vehicle re-identificatio
 ### Detection 
 We have used the YOLOX-x model from mmdetection.
 
-| Model   | Trained on | Weights | Config | AP  |
-| ------- | ---------- | ------- | ------ | --- |
-| YOLOX-x | All        |         |        |     |
-| YOLOX-x | Day        |         |        |     |
-| YOLOX-x | Dawn       |         |        |     |
-| YOLOX-x | Rain       |         |        |     |
-| YOLOX-x | Night      |         |        |     |
+| Model   | Trained on | Weights                                                                                                                                                                     | Config                                                                                                                                                                   | AP    |
+| ------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----- |
+| YOLOX-x | All        | [download](https://webdisk.ads.mwn.de/Handlers/AnonymousDownload.ashx?folder=18e2eac4&path=Datenbanken\Synthehicle\pretrained_models\detection\yolox_synthehicle_all.pth)   | [download](https://webdisk.ads.mwn.de/Handlers/AnonymousDownload.ashx?folder=18e2eac4&path=Datenbanken\Synthehicle\pretrained_models\detection\yolox_x_8x8_300e_coco.py) | 59.7% |
+| YOLOX-x | Day        | [download](https://webdisk.ads.mwn.de/Handlers/AnonymousDownload.ashx?folder=18e2eac4&path=Datenbanken\Synthehicle\pretrained_models\detection\yolox_synthehicle_day.pth)   | [download](https://webdisk.ads.mwn.de/Handlers/AnonymousDownload.ashx?folder=18e2eac4&path=Datenbanken\Synthehicle\pretrained_models\detection\yolox_x_8x8_300e_coco.py) | 58.7% |
+| YOLOX-x | Dawn       | [download](https://webdisk.ads.mwn.de/Handlers/AnonymousDownload.ashx?folder=18e2eac4&path=Datenbanken\Synthehicle\pretrained_models\detection\yolox_synthehicle_dawn.pth)  | [download](https://webdisk.ads.mwn.de/Handlers/AnonymousDownload.ashx?folder=18e2eac4&path=Datenbanken\Synthehicle\pretrained_models\detection\yolox_x_8x8_300e_coco.py) | 60.8% |
+| YOLOX-x | Rain       | [download](https://webdisk.ads.mwn.de/Handlers/AnonymousDownload.ashx?folder=18e2eac4&path=Datenbanken\Synthehicle\pretrained_models\detection\yolox_synthehicle_rain.pth)  | [download](https://webdisk.ads.mwn.de/Handlers/AnonymousDownload.ashx?folder=18e2eac4&path=Datenbanken\Synthehicle\pretrained_models\detection\yolox_x_8x8_300e_coco.py) | 56.8% |
+| YOLOX-x | Night      | [download](https://webdisk.ads.mwn.de/Handlers/AnonymousDownload.ashx?folder=18e2eac4&path=Datenbanken\Synthehicle\pretrained_models\detection\yolox_synthehicle_night.pth) | [download](https://webdisk.ads.mwn.de/Handlers/AnonymousDownload.ashx?folder=18e2eac4&path=Datenbanken\Synthehicle\pretrained_models\detection\yolox_x_8x8_300e_coco.py) | 50.6% |
+
+The specialized models (day, dawn, rain, night) are provided for completeness. Results from our paper indicate that the model trained on all subsets performs best for all environmental setups.
 
 ### Vehicle Re-Identification
 
 We have used the fastreid ResNet-50 Model with IBN:
 
-| Model    | Trained on | Weights | Config | mAP |
-| -------- | ---------- | ------- | ------ | --- |
-| fastreid | All        |         |        |     |
-| fastreid | Day        |         |        |     |
-| fastreid | Dawn       |         |        |     |
-| fastreid | Rain       |         |        |     |
-| fastreid | Night      |         |        |     |
+| Model    | Trained on | Weights                                                                                                                                                          | Config | mAP    |
+| -------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | ------ |
+| fastreid | All        | [download](https://webdisk.ads.mwn.de/Handlers/AnonymousDownload.ashx?folder=18e2eac4&path=Datenbanken\Synthehicle\pretrained_models\reid\synthehicle_all.pth)   |        | 47.8%  |
+| fastreid | Day        | [download](https://webdisk.ads.mwn.de/Handlers/AnonymousDownload.ashx?folder=18e2eac4&path=Datenbanken\Synthehicle\pretrained_models\reid\synthehicle_day.pth)   |        | 59.8%  |
+| fastreid | Dawn       | [download](https://webdisk.ads.mwn.de/Handlers/AnonymousDownload.ashx?folder=18e2eac4&path=Datenbanken\Synthehicle\pretrained_models\reid\synthehicle_dawn.pth)  |        | 47.57% |
+| fastreid | Rain       | [download](https://webdisk.ads.mwn.de/Handlers/AnonymousDownload.ashx?folder=18e2eac4&path=Datenbanken\Synthehicle\pretrained_models\reid\synthehicle_rain.pth)  |        | 39.08% |
+| fastreid | Night      | [download](https://webdisk.ads.mwn.de/Handlers/AnonymousDownload.ashx?folder=18e2eac4&path=Datenbanken\Synthehicle\pretrained_models\reid\synthehicle_night.pth) |        | 27.04% |
+
+The specialized models (day, dawn, rain, night) are provided for completeness. Results from our paper indicate that the model trained on all subsets performs best for all environmental setups. We will provide a fast-reid config soon alongside a model class. The weights can be read into any fast-reid ResNet-50 model.
 
 
 ## Citation   
