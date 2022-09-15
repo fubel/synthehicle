@@ -1,6 +1,7 @@
 # Synthehicle
 
 [![Paper](http://img.shields.io/badge/paper-arxiv.2208.14167-B31B1B.svg)](https://arxiv.org/abs/2208.14167)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/synthehicle-multi-vehicle-multi-camera/multi-object-tracking-on-synthehicle)](https://paperswithcode.com/sota/multi-object-tracking-on-synthehicle)
 
 ![gif](synthehicle.gif)
 
