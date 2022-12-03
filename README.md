@@ -9,7 +9,7 @@ Synthehicle is a massive CARLA-based synthehic multi-vehicle multi-camera tracki
 
 ### News (18/11/22)
  
-* :boom: Synthehicle has been accepted to WACV Workshops 2023
+* Synthehicle has been accepted to WACV Workshops 2023
 * We have added the CARLA and evaluation scripts
 * The evaluation server is ready and we are currently working on deploying it
 
