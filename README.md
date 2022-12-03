@@ -9,19 +9,17 @@ Synthehicle is a massive CARLA-based synthehic multi-vehicle multi-camera tracki
 
 ### News (18/11/22)
  
-* Synthehicle has been accepted to WACV Workshops 2023
-* We have added jpg frames to our releases
-* We have added the CARLA code
+* :boom: Synthehicle has been accepted to WACV Workshops 2023
+* We have added the CARLA and evaluation scripts
+* The evaluation server is ready and we are currently working on deploying it
 
 ## Dataset
 
 The 17 hour Synthehicle dataset consists of 64 scenes in four different weather conditions, 16 different camera setups, and 340 camera videos. It is freely available via the following download links provided [here](DOWNLOAD.md).
 
-## Evaluation & Baselines
+## Evaluation
 
-Evaluation scripts for all the tasks will be provided soon alongside an official evaluation server to test models against ground truth for several tasks.
-
-**Note**: We are currently setting up our evaluation server. If you want to evaluate your results on the test set, please open an issue in this repository and attach your prediction `.txt` file (in MOT challenge format). The results will then be evaluated against the test set ground truth. 
+To evaluate on Synthehicle please refer to our [wiki](https://github.com/fubel/synthehicle/wiki/Evaluation).
 
 ## Generate Data
 
@@ -29,7 +27,7 @@ If you want to generate more data, please follow the README in the `carla` direc
 
 ## Pretrained Models
 
-We will provide pretrained weights for 2D detection and vehicle re-identification:
+We provide pretrained weights for 2D detection and vehicle re-identification:
 
 ### Detection 
 We have used the YOLOX-x model from mmdetection.
@@ -58,6 +56,9 @@ We have used the fastreid ResNet-50 Model with IBN:
 
 The specialized models (day, dawn, rain, night) are provided for completeness. Results from our paper indicate that the model trained on all subsets performs best for all environmental setups. We will provide a fast-reid config soon alongside a model class. The weights can be read into any fast-reid ResNet-50 model.
 
+## Tracking
+
+In our paper, single-camera tracking has been performed using [DeepSORT](https://github.com/nwojke/deep_sort) with the models above. Multi-camera tracking has been performed using [ELECTRICITY](https://github.com/KevinQian97/ELECTRICITY-MTMC).
 
 ## Citation   
 
