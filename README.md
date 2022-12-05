@@ -23,7 +23,7 @@ To evaluate on Synthehicle please refer to our [wiki](https://github.com/fubel/s
 
 ## Generate Data
 
-If you want to generate more data, please follow the README in the `carla` directory.
+To generate your own data similar to Synthehicle please refer to our [wiki](https://github.com/fubel/synthehicle/wiki/Data-Creation).
 
 ## Pretrained Models
 
