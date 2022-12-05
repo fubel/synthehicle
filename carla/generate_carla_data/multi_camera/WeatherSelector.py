@@ -1,5 +1,6 @@
 import carla
 
+
 class WeatherSelector:
     def __init__(self):
         self.cloudiness = None  # 0.0 to 100.0
@@ -10,18 +11,136 @@ class WeatherSelector:
         self.sun_altitude_angle = None  # -90.0 to 90.0
 
     def get_weather_options(self):
-        return [self.morning(), self.midday(), self.afternoon(), self.default(), self.almost_night(),
-                self.customization(), self.HardRainNight(), self.SoftRainNight(), self.HardRainNoon(), self.SoftRainNoon()]
+        return [
+            self.day(),
+            self.dawn(),
+            self.rainy(),
+            self.night(),
+        ]
 
-    def morning(self):
+    def day(self):
         self.cloudiness = 20.0
-        self.precipitation = 90.0
-        self.precipitation_deposits = 30.0
-        self.wind_intensity = 30.0
+        self.precipitation = 0.0
+        self.precipitation_deposits = 0.0
+        self.wind_intensity = 2.0
         self.sun_azimuth_angle = 0.0
-        self.sun_altitude_angle = 30.0
-        return [self.cloudiness, self.precipitation, self.precipitation_deposits, self.wind_intensity,
-                self.sun_azimuth_angle, self.sun_altitude_angle]
+        self.sun_altitude_angle = 35.0
+        self.fog_density = 2.0
+        self.fog_distance = 0.75
+        self.fog_falloff = 0.1
+        self.wetness = 0.0
+        self.scattering_intensity = 1.0
+        self.mie_scattering_scale = 0.03
+        self.rayleigh_scattering_scale = 0.0331
+
+        return [
+            self.cloudiness,
+            self.precipitation,
+            self.precipitation_deposits,
+            self.wind_intensity,
+            self.sun_azimuth_angle,
+            self.sun_altitude_angle,
+            self.fog_density,
+            self.fog_distance,
+            self.fog_falloff,
+            self.wetness,
+            self.scattering_intensity,
+            self.mie_scattering_scale,
+            self.rayleigh_scattering_scale,
+        ]
+
+    def dawn(self):
+        self.cloudiness = 20.0
+        self.precipitation = 0.0
+        self.precipitation_deposits = 0.0
+        self.wind_intensity = 2.0
+        self.sun_azimuth_angle = 200.0
+        self.sun_altitude_angle = 5.0
+        self.fog_density = 2.0
+        self.fog_distance = 0.75
+        self.fog_falloff = 0.1
+        self.wetness = 0.0
+        self.scattering_intensity = 1.0
+        self.mie_scattering_scale = 0.03
+        self.rayleigh_scattering_scale = 0.0331
+
+        return [
+            self.cloudiness,
+            self.precipitation,
+            self.precipitation_deposits,
+            self.wind_intensity,
+            self.sun_azimuth_angle,
+            self.sun_altitude_angle,
+            self.fog_density,
+            self.fog_distance,
+            self.fog_falloff,
+            self.wetness,
+            self.scattering_intensity,
+            self.mie_scattering_scale,
+            self.rayleigh_scattering_scale,
+        ]
+
+    def rainy(self):
+        self.cloudiness = 100.0
+        self.precipitation = 95.0
+        self.precipitation_deposits = 0.0
+        self.wind_intensity = 40.0
+        self.sun_azimuth_angle = 0.0
+        self.sun_altitude_angle = 20.0
+        self.fog_density = 20.0
+        self.fog_distance = 0.9
+        self.fog_falloff = 0.1
+        self.wetness = 0.0
+        self.scattering_intensity = 1.0
+        self.mie_scattering_scale = 0.03
+        self.rayleigh_scattering_scale = 0.0331
+
+        return [
+            self.cloudiness,
+            self.precipitation,
+            self.precipitation_deposits,
+            self.wind_intensity,
+            self.sun_azimuth_angle,
+            self.sun_altitude_angle,
+            self.fog_density,
+            self.fog_distance,
+            self.fog_falloff,
+            self.wetness,
+            self.scattering_intensity,
+            self.mie_scattering_scale,
+            self.rayleigh_scattering_scale,
+        ]
+
+    def night(self):
+        self.cloudiness = 0.0
+        self.precipitation = 0.0
+        self.precipitation_deposits = 0.0
+        self.wind_intensity = 2.0
+        self.sun_azimuth_angle = 0.0
+        self.sun_altitude_angle = -45.0
+        self.fog_density = 0.0
+        self.fog_distance = 0.75
+        self.fog_falloff = 0.1
+        self.wetness = 0.0
+        self.scattering_intensity = 1.0
+        self.mie_scattering_scale = 0.03
+        self.rayleigh_scattering_scale = 0.0331
+
+        return [
+            self.cloudiness,
+            self.precipitation,
+            self.precipitation_deposits,
+            self.wind_intensity,
+            self.sun_azimuth_angle,
+            self.sun_altitude_angle,
+            self.fog_density,
+            self.fog_distance,
+            self.fog_falloff,
+            self.wetness,
+            self.scattering_intensity,
+            self.mie_scattering_scale,
+            self.rayleigh_scattering_scale,
+        ]
 
     def midday(self):
         self.cloudiness = 30.0
@@ -30,8 +149,14 @@ class WeatherSelector:
         self.wind_intensity = 30.0
         self.sun_azimuth_angle = 0.0
         self.sun_altitude_angle = 80  # 80.0  # 45
-        return [self.cloudiness, self.precipitation, self.precipitation_deposits, self.wind_intensity,
-                self.sun_azimuth_angle, self.sun_altitude_angle]
+        return [
+            self.cloudiness,
+            self.precipitation,
+            self.precipitation_deposits,
+            self.wind_intensity,
+            self.sun_azimuth_angle,
+            self.sun_altitude_angle,
+        ]
 
     def afternoon(self):
         self.cloudiness = 50.0
@@ -40,8 +165,14 @@ class WeatherSelector:
         self.wind_intensity = 30.0
         self.sun_azimuth_angle = 0.0
         self.sun_altitude_angle = -40.0
-        return [self.cloudiness, self.precipitation, self.precipitation_deposits, self.wind_intensity,
-                self.sun_azimuth_angle, self.sun_altitude_angle]
+        return [
+            self.cloudiness,
+            self.precipitation,
+            self.precipitation_deposits,
+            self.wind_intensity,
+            self.sun_azimuth_angle,
+            self.sun_altitude_angle,
+        ]
 
     def default(self):
         self.cloudiness = -1.0
@@ -50,22 +181,48 @@ class WeatherSelector:
         self.wind_intensity = -1.0
         self.sun_azimuth_angle = -1.0
         self.sun_altitude_angle = -1.0
-        return [self.cloudiness, self.precipitation, self.precipitation_deposits, self.wind_intensity,
-                self.sun_azimuth_angle, self.sun_altitude_angle]
+        return [
+            self.cloudiness,
+            self.precipitation,
+            self.precipitation_deposits,
+            self.wind_intensity,
+            self.sun_azimuth_angle,
+            self.sun_altitude_angle,
+        ]
 
-    def almostnight(self):
+    def almost_night(self):
         self.cloudiness = 30.0
         self.precipitation = 30.0
         self.precipitation_deposits = 0.0
         self.wind_intensity = 30.0
         self.sun_azimuth_angle = 0.0
         self.sun_altitude_angle = -60.0
-        return [self.cloudiness, self.precipitation, self.precipitation_deposits, self.wind_intensity,
-                self.sun_azimuth_angle, self.sun_altitude_angle]
+        self.wetness = 0.0
+        return [
+            self.cloudiness,
+            self.precipitation,
+            self.precipitation_deposits,
+            self.wind_intensity,
+            self.sun_azimuth_angle,
+            self.sun_altitude_angle,
+        ]
 
-    def customization(self, cloudiness=10.0, precipitation=10, wind_intensity=10, sun_azimuth_angle=10, sun_altitude_angle=10):
+    def customization(
+        self,
+        cloudiness=10.0,
+        precipitation=10,
+        wind_intensity=10,
+        sun_azimuth_angle=10,
+        sun_altitude_angle=10,
+    ):
 
-        return([cloudiness, precipitation, wind_intensity, sun_azimuth_angle, sun_altitude_angle])
+        return [
+            cloudiness,
+            precipitation,
+            wind_intensity,
+            sun_azimuth_angle,
+            sun_altitude_angle,
+        ]
 
     def HardRainNight(self):
         self.cloudiness = 100.0
@@ -82,9 +239,21 @@ class WeatherSelector:
         self.mie_scattering_scale = 0.03
         self.rayleigh_scattering_scale = 0.03
 
-        return [self.cloudiness, self.precipitation, self.precipitation_deposits, self.wind_intensity,
-                self.sun_azimuth_angle, self.sun_altitude_angle, self.fog_density,
-                self.fog_distance, self.fog_falloff, self.wetness, self.scattering_intensity, self.mie_scattering_scale, self.rayleigh_scattering_scale]
+        return [
+            self.cloudiness,
+            self.precipitation,
+            self.precipitation_deposits,
+            self.wind_intensity,
+            self.sun_azimuth_angle,
+            self.sun_altitude_angle,
+            self.fog_density,
+            self.fog_distance,
+            self.fog_falloff,
+            self.wetness,
+            self.scattering_intensity,
+            self.mie_scattering_scale,
+            self.rayleigh_scattering_scale,
+        ]
 
     def SoftRainNight(self):
         self.cloudiness = 60.0
@@ -101,9 +270,21 @@ class WeatherSelector:
         self.mie_scattering_scale = 0.03
         self.rayleigh_scattering_scale = 0.03
 
-        return [self.cloudiness, self.precipitation, self.precipitation_deposits, self.wind_intensity,
-                self.sun_azimuth_angle, self.sun_altitude_angle, self.fog_density,
-                self.fog_distance, self.fog_falloff, self.wetness, self.scattering_intensity, self.mie_scattering_scale, self.rayleigh_scattering_scale]
+        return [
+            self.cloudiness,
+            self.precipitation,
+            self.precipitation_deposits,
+            self.wind_intensity,
+            self.sun_azimuth_angle,
+            self.sun_altitude_angle,
+            self.fog_density,
+            self.fog_distance,
+            self.fog_falloff,
+            self.wetness,
+            self.scattering_intensity,
+            self.mie_scattering_scale,
+            self.rayleigh_scattering_scale,
+        ]
 
     def HardRainNoon(self):
         self.cloudiness = 100.0
@@ -120,9 +301,21 @@ class WeatherSelector:
         self.mie_scattering_scale = 0.03
         self.rayleigh_scattering_scale = 0.03
 
-        return [self.cloudiness, self.precipitation, self.precipitation_deposits, self.wind_intensity,
-                self.sun_azimuth_angle, self.sun_altitude_angle, self.fog_density,
-                self.fog_distance, self.fog_falloff, self.wetness, self.scattering_intensity, self.mie_scattering_scale, self.rayleigh_scattering_scale]
+        return [
+            self.cloudiness,
+            self.precipitation,
+            self.precipitation_deposits,
+            self.wind_intensity,
+            self.sun_azimuth_angle,
+            self.sun_altitude_angle,
+            self.fog_density,
+            self.fog_distance,
+            self.fog_falloff,
+            self.wetness,
+            self.scattering_intensity,
+            self.mie_scattering_scale,
+            self.rayleigh_scattering_scale,
+        ]
 
     def SoftRainNoon(self):
         self.cloudiness = 20.0
@@ -139,11 +332,22 @@ class WeatherSelector:
         self.mie_scattering_scale = 0.03
         self.rayleigh_scattering_scale = 0.03
 
-        return [self.cloudiness, self.precipitation, self.precipitation_deposits, self.wind_intensity,
-                self.sun_azimuth_angle, self.sun_altitude_angle, self.fog_density,
-                self.fog_distance, self.fog_falloff, self.wetness, self.scattering_intensity, self.mie_scattering_scale, self.rayleigh_scattering_scale]
+        return [
+            self.cloudiness,
+            self.precipitation,
+            self.precipitation_deposits,
+            self.wind_intensity,
+            self.sun_azimuth_angle,
+            self.sun_altitude_angle,
+            self.fog_density,
+            self.fog_distance,
+            self.fog_falloff,
+            self.wetness,
+            self.scattering_intensity,
+            self.mie_scattering_scale,
+            self.rayleigh_scattering_scale,
+        ]
 
     def set_weather(world, weather_option):
         weather = carla.WeatherParameters(*weather_option)
         world.set_weather(weather)
-
