@@ -8,7 +8,6 @@ import json
 import os
 import cv2
 import carla
-import bbox_new_process
 import math
 
 
@@ -58,85 +57,58 @@ def get_all_data(
             if idx_counts[(visible_id == v.id).nonzero()[0]] >= min_detect
         ]
 
-    # Combine info of depth camera
-    if use_depth:
-        visible_vehicles = [
-            v for v in vehicles if idx_counts[(visible_id == v.id).nonzero()[0]] >= 12
-        ]
-        bounding_boxes = bbox_new_process.get_bb_data(visible_vehicles, camera)
-        depth_array = process_depth_data(depth_data)
-        depth_based_bb, depth_based_vehicle = bbox_new_process.apply_filters_to_3d_bb(
-            bounding_boxes,
-            depth_array,
-            show_img.height,
-            show_img.width,
-            vehicle=visible_vehicles,
-        )
-        depth_based_vehicles_id = {
-            v.id: v.type_id for v in depth_based_vehicle}
-    else:
-        # Based only on Lidar
-        bounding_boxes_3d = [
-            get_bounding_box(vehicle, camera) for vehicle in visible_vehicles
-        ]
-        bounding_boxes_2d = [get_2d_bb(vehicle, camera)
-                             for vehicle in visible_vehicles]
-        world_coords = [
-            vehicle_to_world(create_bb_points(vehicle), vehicle)
-            for vehicle in visible_vehicles
-        ]
-        id_bounding_boxes_2d = {}
-        for i, v in enumerate(visible_vehicles):
-            id = v.id
-            id_bounding_boxes_2d[id] = bounding_boxes_2d[i]
+    # Based only on Lidar
+    bounding_boxes_3d = [
+        get_bounding_box(vehicle, camera) for vehicle in visible_vehicles
+    ]
+    bounding_boxes_2d = [get_2d_bb(vehicle, camera) for vehicle in visible_vehicles]
+    world_coords = [
+        vehicle_to_world(create_bb_points(vehicle), vehicle)
+        for vehicle in visible_vehicles
+    ]
+    id_bounding_boxes_2d = {}
+    for i, v in enumerate(visible_vehicles):
+        id = v.id
+        id_bounding_boxes_2d[id] = bounding_boxes_2d[i]
 
-        filtered_bb_2d_lidar = []
-        filtered_bb_3d_lidar = []
-        filtered_world_coords = []
-        filtered_vehicle_lidar = []
-        locations = []
-        rotations = []
-        for w_coord, db3, bb, vehicle in zip(
-            world_coords, bounding_boxes_3d, bounding_boxes_2d, visible_vehicles
-        ):
-            bb_xmin = bb[0][0]
-            bb_ymin = bb[0][1]
-            bb_xmax = bb[1][0]
-            bb_ymax = bb[1][1]
-            if math.ceil(bb_xmax - bb_xmin) <= 32 or math.ceil(bb_ymax - bb_ymin) <= 32:
-                continue
-            filtered_bb_3d_lidar.append(db3)
-            filtered_bb_2d_lidar.append(bb)
-            filtered_world_coords.append(w_coord)
-            filtered_vehicle_lidar.append(vehicle)
-            t = vehicle.get_transform()
-            locations.append([t.location.x, t.location.y, t.location.z])
-            rotations.append(
-                [t.rotation.pitch, t.rotation.yaw, t.rotation.roll])
+    filtered_bb_2d_lidar = []
+    filtered_bb_3d_lidar = []
+    filtered_world_coords = []
+    filtered_vehicle_lidar = []
+    locations = []
+    rotations = []
+    for w_coord, db3, bb, vehicle in zip(
+        world_coords, bounding_boxes_3d, bounding_boxes_2d, visible_vehicles
+    ):
+        bb_xmin = bb[0][0]
+        bb_ymin = bb[0][1]
+        bb_xmax = bb[1][0]
+        bb_ymax = bb[1][1]
+        if math.ceil(bb_xmax - bb_xmin) <= 32 or math.ceil(bb_ymax - bb_ymin) <= 32:
+            continue
+        filtered_bb_3d_lidar.append(db3)
+        filtered_bb_2d_lidar.append(bb)
+        filtered_world_coords.append(w_coord)
+        filtered_vehicle_lidar.append(vehicle)
+        t = vehicle.get_transform()
+        locations.append([t.location.x, t.location.y, t.location.z])
+        rotations.append([t.rotation.pitch, t.rotation.yaw, t.rotation.roll])
 
-        filtered_vehicles_id_lidar = {
-            v.id: v.type_id for v in filtered_vehicle_lidar}
-        bounding_boxes_2d_final = filtered_bb_2d_lidar
-        bounding_boxes_3d_final = filtered_bb_3d_lidar
+    filtered_vehicles_id_lidar = {v.id: v.type_id for v in filtered_vehicle_lidar}
+    bounding_boxes_2d_final = filtered_bb_2d_lidar
+    bounding_boxes_3d_final = filtered_bb_3d_lidar
 
     filtered_out = {}
-    if use_depth:
-        filtered_out["vehicles_id"] = depth_based_vehicles_id
-        filtered_out["vehicles"] = depth_based_vehicle
-        filtered_out["bbox"] = depth_based_bb
-    else:
-        filtered_out["vehicles_id"] = filtered_vehicles_id_lidar
-        filtered_out["vehicles"] = filtered_vehicle_lidar
-        filtered_out["bbox"] = bounding_boxes_2d_final
-        filtered_out["bbox_3d"] = bounding_boxes_3d_final
-        filtered_out["world_coords"] = filtered_world_coords
-        filtered_out["locations"] = locations
-        filtered_out["rotations"] = rotations
-        # filtered_out['dist2'] = filtered_vehicle_sensor_dist2
+    filtered_out["vehicles_id"] = filtered_vehicles_id_lidar
+    filtered_out["vehicles"] = filtered_vehicle_lidar
+    filtered_out["bbox"] = bounding_boxes_2d_final
+    filtered_out["bbox_3d"] = bounding_boxes_3d_final
+    filtered_out["world_coords"] = filtered_world_coords
+    filtered_out["locations"] = locations
+    filtered_out["rotations"] = rotations
 
     if json_path is not None:
-        filtered_out["class"] = get_vehicle_class(
-            filtered_out["vehicles"], json_path)
+        filtered_out["class"] = get_vehicle_class(filtered_out["vehicles"], json_path)
     return filtered_out, filtered_data
 
 
@@ -239,8 +211,7 @@ def get_camera_position(json_path=None):
     yaw = math.degrees(camera_info["yaw"])
     roll = math.degrees(camera_info["roll"])
     T = carla.Transform(
-        carla.Location(x=x, y=y, z=z), carla.Rotation(
-            pitch=pitch, yaw=yaw, roll=roll)
+        carla.Location(x=x, y=y, z=z), carla.Rotation(pitch=pitch, yaw=yaw, roll=roll)
     )
     return T
 
@@ -370,8 +341,7 @@ def get_list_transform(vehicles_list, sensor):
         t_list.append(transform)
     t_list = np.array(t_list).reshape((len(t_list), 6))
 
-    transform_h = np.concatenate(
-        (t_list[:, :3], np.ones((len(t_list), 1))), axis=1)
+    transform_h = np.concatenate((t_list[:, :3], np.ones((len(t_list), 1))), axis=1)
     sensor_world_matrix = get_matrix(sensor.get_transform())
     world_sensor_matrix = np.linalg.inv(sensor_world_matrix)
     transform_s = np.dot(world_sensor_matrix, transform_h.T).T
@@ -382,8 +352,7 @@ def get_list_transform(vehicles_list, sensor):
 def filter_angle(vehicles_list, v_transform, v_transform_s, sensor):
     attr_dict = sensor.attributes
     VIEW_FOV = float(attr_dict["fov"])
-    v_angle = np.arctan2(
-        v_transform_s[:, 1], v_transform_s[:, 0]) * 180 / np.pi
+    v_angle = np.arctan2(v_transform_s[:, 1], v_transform_s[:, 0]) * 180 / np.pi
 
     selector = np.array(np.absolute(v_angle) < (int(VIEW_FOV) / 2))
     vehicles_list_f = [v for v, s in zip(vehicles_list, selector) if s]
@@ -407,8 +376,7 @@ def filter_distance(vehicles_list, v_transform, v_transform_s, sensor, max_dist=
 
 # Apply angle and distance filters in one function
 def filter_angle_distance(vehicles_list, sensor, max_dist=100):
-    vehicles_transform, vehicles_transform_s = get_list_transform(
-        vehicles_list, sensor)
+    vehicles_transform, vehicles_transform_s = get_list_transform(vehicles_list, sensor)
     vehicles_list, vehicles_transform, vehicles_transform_s = filter_distance(
         vehicles_list, vehicles_transform, vehicles_transform_s, sensor, max_dist
     )
@@ -431,8 +399,7 @@ def filter_lidar(lidar_data, camera, max_dist):
     CAM_VFOV = np.rad2deg(
         2 * np.arctan(np.tan(np.deg2rad(CAM_HFOV / 2)) * CAM_H / CAM_W)
     )
-    lidar_points = np.array(
-        [[p.point.y, -p.point.z, p.point.x] for p in lidar_data])
+    lidar_points = np.array([[p.point.y, -p.point.z, p.point.x] for p in lidar_data])
 
     dist2 = np.sum(np.square(lidar_points), axis=1).reshape((-1))
     p_angle_h = np.absolute(
@@ -445,8 +412,7 @@ def filter_lidar(lidar_data, camera, max_dist):
     selector = np.array(
         np.logical_and(
             np.logical_and(dist2 > 0, dist2 < (max_dist**2)),
-            np.logical_and(p_angle_h < (CAM_HFOV / 2),
-                           p_angle_v < (CAM_VFOV / 2)),
+            np.logical_and(p_angle_h < (CAM_HFOV / 2), p_angle_v < (CAM_VFOV / 2)),
         )
     )
     filtered_lidar = [pt for pt, s in zip(lidar_data, selector) if s]
@@ -480,8 +446,7 @@ def show_lidar(lidar_data, camera, carla_img, path, framenumber):
         "21": (0, 128, 255),
         "22": (255, 255, 255),
     }
-    lidar_np = np.array([[p.point.y, -p.point.z, p.point.x]
-                        for p in lidar_data])
+    lidar_np = np.array([[p.point.y, -p.point.z, p.point.x] for p in lidar_data])
     cam_k = get_camera_intrinsic(camera)
 
     # Project LIDAR 3D to Camera 2D
@@ -521,8 +486,7 @@ def show_lidar(lidar_data, camera, carla_img, path, framenumber):
 
 # Add actor ID of the vehcile hit by the lidar points
 def get_points_id(lidar_points, vehicles, camera, max_dist):
-    vehicles_f, vehicles_f_dist2 = filter_angle_distance(
-        vehicles, camera, max_dist)
+    vehicles_f, vehicles_f_dist2 = filter_angle_distance(vehicles, camera, max_dist)
 
     vehicles_f_dist2_new = []
     for i, v in enumerate(vehicles_f):
@@ -533,8 +497,7 @@ def get_points_id(lidar_points, vehicles, camera, max_dist):
     for p in lidar_points:
         sensor_world_matrix = get_matrix(camera.get_transform())
 
-        pw = np.dot(sensor_world_matrix, [
-                    [p.point.x], [p.point.y], [p.point.z], [1]])
+        pw = np.dot(sensor_world_matrix, [[p.point.x], [p.point.y], [p.point.z], [1]])
         pw = carla.Location(pw[0, 0], pw[1, 0], pw[2, 0])
         for v in vehicles_f:
             if v.bounding_box.contains(pw, v.get_transform()):
