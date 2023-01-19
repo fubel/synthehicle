@@ -1,6 +1,7 @@
 # Synthehicle
 
 [![Paper](http://img.shields.io/badge/paper-arxiv.2208.14167-B31B1B.svg)](https://arxiv.org/abs/2208.14167)
+[![Paper](https://img.shields.io/badge/paper-WACV2023-brightgreen)](https://openaccess.thecvf.com/content/WACV2023W/RWS/html/Herzog_Synthehicle_Multi-Vehicle_Multi-Camera_Tracking_in_Virtual_Cities_WACVW_2023_paper.html)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/synthehicle-multi-vehicle-multi-camera/multi-object-tracking-on-synthehicle)](https://paperswithcode.com/sota/multi-object-tracking-on-synthehicle)
 
 ![gif](synthehicle.gif)
@@ -65,15 +66,12 @@ In our paper, single-camera tracking has been performed using [DeepSORT](https:/
 If you use Synthehicle for your work, please cite:
 
 ```
-@misc{https://doi.org/10.48550/arxiv.2208.14167,
-  doi = {10.48550/ARXIV.2208.14167},
-  url = {https://arxiv.org/abs/2208.14167},
-  author = {Herzog, Fabian and Chen, Junpeng and Teepe, Torben and Gilg, Johannes and Hörmann, Stefan and Rigoll, Gerhard},
-  keywords = {Computer Vision and Pattern Recognition (cs.CV), FOS: Computer and information sciences, FOS: Computer and information sciences},
-  title = {Synthehicle: Multi-Vehicle Multi-Camera Tracking in Virtual Cities},
-  publisher = {arXiv},
-  year = {2022},
-  copyright = {arXiv.org perpetual, non-exclusive license}
+@InProceedings{Herzog_2023_WACV,
+    author    = {Herzog, Fabian and Chen, Junpeng and Teepe, Torben and Gilg, Johannes and H\"ormann, Stefan and Rigoll, Gerhard},
+    title     = {Synthehicle: Multi-Vehicle Multi-Camera Tracking in Virtual Cities},
+    booktitle = {Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision (WACV) Workshops},
+    month     = {January},
+    year      = {2023},
+    pages     = {1-11}
 }
-
 ``` 
