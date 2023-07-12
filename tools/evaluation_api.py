@@ -83,8 +83,14 @@ if args.prediction:
     else:
         print("Failed to upload file")
 else:
+    # specify the bearer token to be used for authentication
+    bearer_token = args.auth_token
+
+    # create a dictionary with the headers for the POST request
+    headers = {"Authorization": f"Bearer {bearer_token}"}
+    
     # get results for experiment token
-    response = requests.get(url + "/results/" + args.exp_token)
+    response = requests.get(url + "/results/" + args.exp_token, headers=headers)
 
     if response.status_code == 200:
         data = response.json()
